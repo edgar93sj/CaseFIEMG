@@ -1,0 +1,792 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/13/2026 5:28:22 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-6B78N2G"
+  DTS:CreatorName="DESKTOP-6B78N2G\edgar"
+  DTS:DTSID="{25BF7879-C808-4A68-9441-5963D23FAC67}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Carga_Bronze"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{408FC802-4EC1-41F7-811C-7B664E69A08C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5BFD8E3B-2E35-4F3E-96C0-09B3578AC13A}"
+      DTS:ObjectName="DESKTOP-6B78N2G.DW_NEXORA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-6B78N2G;Initial Catalog=DW_NEXORA;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{463B5AF4-14CE-4178-9670-69C3BFDF764A}"
+      DTS:ObjectName="Gerenciador de Conexões do Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\edgar\OneDrive\Área de Trabalho\FIEMG\base_vendas_comissao.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Ler_Excel_Carregar_Dados_Bronze"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{237A7EC2-A63E-431B-9BA0-695963313D8F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Ler_Excel_Carregar_Dados_Bronze">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Origem do Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem do Excel"
+              name="Arquivo_base_vendas_comissao"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">Sheet1$</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="O mapeamento de parâmetros no comando SQL para variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel]"
+                  name="Saída de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[period]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[period]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[period]"
+                      name="period"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[user_id]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[user_id]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[user_id]"
+                      name="user_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[type_of_user]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[type_of_user]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[type_of_user]"
+                      name="type_of_user"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[country]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[cluster]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[cluster]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[cluster]"
+                      name="cluster"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[office]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[office]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[office]"
+                      name="office"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[origin]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[origin]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[origin]"
+                      name="origin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[churn]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[churn]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[churn]"
+                      name="churn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[consulting]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[consulting]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[consulting]"
+                      name="consulting"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[new_business]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[new_business]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[new_business]"
+                      name="new_business"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[segment_comission]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[segment_comission]"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[segment_comission]"
+                      name="segment_comission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[first_date_comission]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[first_date_comission]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[first_date_comission]"
+                      name="first_date_comission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[period_comission_brl]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[period_comission_brl]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[period_comission_brl]"
+                      name="period_comission_brl"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[lifetime_commission_brl]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[lifetime_commission_brl]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[lifetime_commission_brl]"
+                      name="lifetime_commission_brl"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[period]"
+                      dataType="wstr"
+                      length="255"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[user_id]"
+                      dataType="r8"
+                      name="user_id" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[type_of_user]"
+                      dataType="wstr"
+                      length="255"
+                      name="type_of_user" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="255"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[cluster]"
+                      dataType="wstr"
+                      length="255"
+                      name="cluster" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[office]"
+                      dataType="wstr"
+                      length="255"
+                      name="office" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[origin]"
+                      dataType="wstr"
+                      length="255"
+                      name="origin" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[churn]"
+                      dataType="wstr"
+                      length="255"
+                      name="churn" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[consulting]"
+                      dataType="wstr"
+                      length="255"
+                      name="consulting" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[new_business]"
+                      dataType="wstr"
+                      length="255"
+                      name="new_business" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[segment_comission]"
+                      dataType="wstr"
+                      length="255"
+                      name="segment_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[first_date_comission]"
+                      dataType="date"
+                      name="first_date_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[period_comission_brl]"
+                      dataType="r8"
+                      name="period_comission_brl" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].ExternalColumns[lifetime_commission_brl]"
+                      dataType="r8"
+                      name="lifetime_commission_brl" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem do Excel">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[period]"
+                      name="period" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[user_id]"
+                      dataType="r8"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[user_id]"
+                      name="user_id" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[type_of_user]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[type_of_user]"
+                      name="type_of_user" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[country]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[cluster]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[cluster]"
+                      name="cluster" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[office]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[office]"
+                      name="office" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[origin]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[origin]"
+                      name="origin" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[churn]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[churn]"
+                      name="churn" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[consulting]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[consulting]"
+                      name="consulting" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[new_business]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[new_business]"
+                      name="new_business" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[segment_comission]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[segment_comission]"
+                      name="segment_comission" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[first_date_comission]"
+                      dataType="date"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[first_date_comission]"
+                      name="first_date_comission" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[period_comission_brl]"
+                      dataType="r8"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[period_comission_brl]"
+                      name="period_comission_brl" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[lifetime_commission_brl]"
+                      dataType="r8"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[lifetime_commission_brl]"
+                      name="lifetime_commission_brl" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Erro de Origem do Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Carga_base_vendas_SQL"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[bronze].[Carga_base_vendas_SQL]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[period]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="period"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[period]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[period]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[user_id]"
+                      cachedDataType="r8"
+                      cachedName="user_id"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[user_id]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[user_id]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[type_of_user]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="type_of_user"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[type_of_user]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[type_of_user]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="country"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[country]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[country]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[cluster]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="cluster"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[cluster]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[cluster]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[office]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="office"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[office]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[office]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[origin]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="origin"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[origin]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[origin]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[churn]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="churn"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[churn]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[churn]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[consulting]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="consulting"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[consulting]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[consulting]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[new_business]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="new_business"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[new_business]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[new_business]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[segment_comission]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="segment_comission"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[segment_comission]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[segment_comission]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[first_date_comission]"
+                      cachedDataType="date"
+                      cachedName="first_date_comission"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[first_date_comission]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[first_date_comission]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[period_comission_brl]"
+                      cachedDataType="r8"
+                      cachedName="period_comission_brl"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[period_comission_brl]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[period_comission_brl]" />
+                    <inputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].Columns[lifetime_commission_brl]"
+                      cachedDataType="r8"
+                      cachedName="lifetime_commission_brl"
+                      externalMetadataColumnId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[lifetime_commission_brl]"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel].Columns[lifetime_commission_brl]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[period]"
+                      dataType="wstr"
+                      length="255"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[user_id]"
+                      dataType="r8"
+                      name="user_id" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[type_of_user]"
+                      dataType="wstr"
+                      length="255"
+                      name="type_of_user" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="255"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[cluster]"
+                      dataType="wstr"
+                      length="255"
+                      name="cluster" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[office]"
+                      dataType="wstr"
+                      length="255"
+                      name="office" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[origin]"
+                      dataType="wstr"
+                      length="255"
+                      name="origin" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[churn]"
+                      dataType="wstr"
+                      length="255"
+                      name="churn" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[consulting]"
+                      dataType="wstr"
+                      length="255"
+                      name="consulting" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[new_business]"
+                      dataType="wstr"
+                      length="255"
+                      name="new_business" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[segment_comission]"
+                      dataType="wstr"
+                      length="255"
+                      name="segment_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      name="first_date_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[period_comission_brl]"
+                      dataType="r8"
+                      name="period_comission_brl" />
+                    <externalMetadataColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB].ExternalColumns[lifetime_commission_brl]"
+                      dataType="r8"
+                      name="lifetime_commission_brl" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Ler_Excel_Carregar_Dados_Bronze.Paths[Saída de Origem do Excel]"
+              endId="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL.Inputs[Entrada de Destino OLE DB]"
+              name="Saída de Origem do Excel"
+              startId="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao.Outputs[Saída de Origem do Excel]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="256,42"
+          Id="Package\Ler_Excel_Carregar_Dados_Bronze"
+          TopLeft="88.5,50.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Ler_Excel_Carregar_Dados_Bronze">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao"
+          TopLeft="121,62" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL"
+          TopLeft="149.5,161.5" />
+        <EdgeLayout
+          Id="Package\Ler_Excel_Carregar_Dados_Bronze.Paths[Saída de Origem do Excel]"
+          TopLeft="241,104">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.5,57.5"
+              Start="0,0"
+              End="12.5,50">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.75"
+                    Point2="0,28.75"
+                    Point3="4,28.75" />
+                  <mssgle:LineSegment
+                    End="8.5,28.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.5,28.75"
+                    Point2="12.5,28.75"
+                    Point3="12.5,32.75" />
+                  <mssgle:LineSegment
+                    End="12.5,50" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Ler_Excel_Carregar_Dados_Bronze\Arquivo_base_vendas_comissao">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Ler_Excel_Carregar_Dados_Bronze\Carga_base_vendas_SQL">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

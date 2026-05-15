@@ -1,0 +1,2071 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/13/2026 6:49:14 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-6B78N2G"
+  DTS:CreatorName="DESKTOP-6B78N2G\edgar"
+  DTS:DTSID="{3C2BE086-F0FD-4CAB-AEAF-46BA71D1BFB9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="Silver"
+  DTS:PackageType="5"
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{4A8B44CF-8FC2-4F97-9E72-67ADC4FB49EF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-6B78N2G]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CFDF90EC-8576-42E3-A2DC-7A59AF61FE06}"
+      DTS:ObjectName="DESKTOP-6B78N2G">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-6B78N2G;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0E1B4B50-A2F6-4064-8310-BE1EC27777C6}"
+      DTS:ObjectName="DESKTOP-6B78N2G.DW_NEXORA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-6B78N2G;Initial Catalog=DW_NEXORA;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Silver-{0E1B4B50-A2F6-4064-8310-BE1EC27777C6}DESKTOP-6B78N2G.DW_NEXORA;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Ambiente_Silver"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{A25BE633-466C-40AD-9018-79EB6B9E848B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Ambiente_Silver"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+              name="ADD_Coluna_Data_Carga"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Inputs[Entrada de Coluna Derivada]"
+                  description="Entrada para a Transformação Coluna Derivada"
+                  name="Entrada de Coluna Derivada">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Coluna Derivada]"
+                  description="Saída Padrão da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  name="Saída de Coluna Derivada"
+                  synchronousInputId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Coluna Derivada].Columns[DATA_CARGA]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Coluna Derivada].Columns[DATA_CARGA]"
+                      name="DATA_CARGA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Erro de Coluna Derivada]"
+                  description="Saída de Erro da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Coluna Derivada"
+                  synchronousInputId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+              name="ADD_Coluna_Data_Carga 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Inputs[Entrada de Coluna Derivada]"
+                  description="Entrada para a Transformação Coluna Derivada"
+                  name="Entrada de Coluna Derivada">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Coluna Derivada]"
+                  description="Saída Padrão da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  name="Saída de Coluna Derivada"
+                  synchronousInputId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Coluna Derivada].Columns[DATA_CARGA]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computação"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Coluna Derivada].Columns[DATA_CARGA]"
+                      name="DATA_CARGA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão de Coluna Derivada"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Expressão Amigável de Coluna Derivada"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Erro de Coluna Derivada]"
+                  description="Saída de Erro da Transformação Coluna Derivada"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Coluna Derivada"
+                  synchronousInputId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Inputs[Entrada de Coluna Derivada]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ambiente_Silver\Carga_Silver_Cliente"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Carga_Silver_Cliente"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[silver].[clientes]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[DATA_CARGA]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DATA_CARGA"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[data_carga]"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Coluna Derivada].Columns[DATA_CARGA]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[user_id]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="user_id"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[user_id]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[user_id]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[type_of_user]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="type_of_user"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[type_of_user]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[type_of_user]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="180"
+                      cachedName="country"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[country]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[country]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[cluster]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="cluster"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[cluster]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[cluster]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[office]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="office"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[office]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[office]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[origin]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="origin"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[origin]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[origin]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[churn]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="churn"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[churn]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[churn]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[segment_comission]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="segment_comission"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[segment_commission]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[segment_comission]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[consulting]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="consulting"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[consulting]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[consulting]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[new_business]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="new_business"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[new_business]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[new_business]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].Columns[first_date_comission]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="first_date_comission"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[first_date_commission]"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[first_date_comission]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[user_id]"
+                      dataType="wstr"
+                      length="15"
+                      name="user_id" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[type_of_user]"
+                      dataType="wstr"
+                      length="10"
+                      name="type_of_user" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="180"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[cluster]"
+                      dataType="wstr"
+                      length="4"
+                      name="cluster" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[office]"
+                      dataType="wstr"
+                      length="100"
+                      name="office" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[origin]"
+                      dataType="wstr"
+                      length="25"
+                      name="origin" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[churn]"
+                      dataType="wstr"
+                      length="10"
+                      name="churn" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[segment_commission]"
+                      dataType="wstr"
+                      length="25"
+                      name="segment_commission" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[consulting]"
+                      dataType="wstr"
+                      length="5"
+                      name="consulting" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[new_business]"
+                      dataType="wstr"
+                      length="5"
+                      name="new_business" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[first_date_commission]"
+                      dataType="dbTimeStamp"
+                      name="first_date_commission" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB].ExternalColumns[data_carga]"
+                      dataType="dbTimeStamp"
+                      name="data_carga" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Carga_Silver_Cliente.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Cliente.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Carga_Silver_Cliente.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ambiente_Silver\Carga_Silver_Comissao"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Carga_Silver_Comissao"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[silver].[comissao]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].Columns[period]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="period"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.period]"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[period]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].Columns[user_id]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="user_id"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.user_id]"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[user_id]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].Columns[period_comission_brl]"
+                      cachedDataType="r8"
+                      cachedName="period_comission_brl"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.period_comission_brl]"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[period_comission_brl]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].Columns[lifetime_commission_brl]"
+                      cachedDataType="r8"
+                      cachedName="lifetime_commission_brl"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.lifetime_commission_brl]"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[lifetime_commission_brl]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].Columns[first_date_comission]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="first_date_comission"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.first_date_comission]"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[first_date_comission]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].Columns[DATA_CARGA]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DATA_CARGA"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA_CARGA]"
+                      lineageId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Coluna Derivada].Columns[DATA_CARGA]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].Columns[churn]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="churn"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[churn]"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[churn]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.period]"
+                      dataType="wstr"
+                      length="255"
+                      name="convert_data 1.period" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.user_id]"
+                      dataType="wstr"
+                      length="115"
+                      name="convert_data 1.user_id" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.period_comission_brl]"
+                      dataType="r8"
+                      name="convert_data 1.period_comission_brl" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.lifetime_commission_brl]"
+                      dataType="r8"
+                      name="convert_data 1.lifetime_commission_brl" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[convert_data 1.first_date_comission]"
+                      dataType="dbTimeStamp"
+                      name="convert_data 1.first_date_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[DATA_CARGA]"
+                      dataType="dbTimeStamp"
+                      name="DATA_CARGA" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB].ExternalColumns[churn]"
+                      dataType="wstr"
+                      length="20"
+                      name="churn" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Carga_Silver_Comissao.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Carga_Silver_Comissao.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Carga_Silver_Comissao.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ambiente_Silver\convert_data"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="convert_data"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[user_id]"
+                      cachedDataType="r8"
+                      cachedName="user_id"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[user_id]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[type_of_user]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="type_of_user"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[type_of_user]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="country"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[country]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[cluster]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="cluster"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[cluster]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[office]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="office"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[office]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[origin]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="origin"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[origin]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[churn]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="churn"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[churn]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[consulting]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="consulting"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[consulting]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[new_business]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="new_business"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[new_business]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[segment_comission]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="segment_comission"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[segment_comission]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados].Columns[first_date_comission]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="first_date_comission"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[user_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[user_id]"
+                      name="user_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[user_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[type_of_user]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[type_of_user]"
+                      name="type_of_user"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[type_of_user]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="180"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[country]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[cluster]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[cluster]"
+                      name="cluster"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[cluster]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[office]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[office]"
+                      name="office"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[office]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[origin]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[origin]"
+                      name="origin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[origin]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[churn]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[churn]"
+                      name="churn"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[churn]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[consulting]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[consulting]"
+                      name="consulting"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[consulting]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[new_business]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[new_business]"
+                      name="new_business"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[new_business]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[segment_comission]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[segment_comission]"
+                      name="segment_comission"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[segment_comission]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados].Columns[first_date_comission]"
+                      name="first_date_comission"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ambiente_Silver\convert_data 1"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="convert_data 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados].Columns[user_id]"
+                      cachedDataType="r8"
+                      cachedName="user_id"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[user_id]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados].Columns[first_date_comission]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="first_date_comission"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados].Columns[period]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="period"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados].Columns[period_comission_brl]"
+                      cachedDataType="r8"
+                      cachedName="period_comission_brl"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period_comission_brl]" />
+                    <inputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados].Columns[lifetime_commission_brl]"
+                      cachedDataType="r8"
+                      cachedName="lifetime_commission_brl"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[lifetime_commission_brl]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[period]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[period]"
+                      name="period"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[user_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[user_id]"
+                      name="user_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[user_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[period_comission_brl]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[period_comission_brl]"
+                      name="period_comission_brl"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period_comission_brl]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[lifetime_commission_brl]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[lifetime_commission_brl]"
+                      name="lifetime_commission_brl"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[lifetime_commission_brl]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados].Columns[first_date_comission]"
+                      name="first_date_comission"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ambiente_Silver\Origem_TB_Bronze"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+              description="Origem OLE DB"
+              name="Origem_TB_Bronze"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[bronze].[Carga_base_vendas_SQL]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Ambiente_Silver\Origem_TB_Bronze.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB]"
+                  name="Saída de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[user_id]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[user_id]"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[user_id]"
+                      name="user_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[type_of_user]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[type_of_user]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[type_of_user]"
+                      name="type_of_user"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[country]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[cluster]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[cluster]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[cluster]"
+                      name="cluster"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[office]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[office]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[office]"
+                      name="office"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[origin]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[origin]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[origin]"
+                      name="origin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[churn]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[churn]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[churn]"
+                      name="churn"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[consulting]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[consulting]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[consulting]"
+                      name="consulting"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[new_business]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[new_business]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[new_business]"
+                      name="new_business"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[segment_comission]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[segment_comission]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[segment_comission]"
+                      name="segment_comission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[first_date_comission]"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]"
+                      name="first_date_comission"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[period]"
+                      dataType="wstr"
+                      length="255"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[user_id]"
+                      dataType="r8"
+                      name="user_id" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[type_of_user]"
+                      dataType="wstr"
+                      length="255"
+                      name="type_of_user" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="255"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[cluster]"
+                      dataType="wstr"
+                      length="255"
+                      name="cluster" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[office]"
+                      dataType="wstr"
+                      length="255"
+                      name="office" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[origin]"
+                      dataType="wstr"
+                      length="255"
+                      name="origin" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[churn]"
+                      dataType="wstr"
+                      length="255"
+                      name="churn" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[consulting]"
+                      dataType="wstr"
+                      length="255"
+                      name="consulting" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[new_business]"
+                      dataType="wstr"
+                      length="255"
+                      name="new_business" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[segment_comission]"
+                      dataType="wstr"
+                      length="255"
+                      name="segment_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      name="first_date_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[period_comission_brl]"
+                      dataType="r8"
+                      name="period_comission_brl" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB].ExternalColumns[lifetime_commission_brl]"
+                      dataType="r8"
+                      name="lifetime_commission_brl" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[user_id]"
+                      dataType="r8"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[user_id]"
+                      name="user_id" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[type_of_user]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[type_of_user]"
+                      name="type_of_user" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[country]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[cluster]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[cluster]"
+                      name="cluster" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[office]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[office]"
+                      name="office" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[origin]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[origin]"
+                      name="origin" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[churn]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[churn]"
+                      name="churn" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[consulting]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[consulting]"
+                      name="consulting" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[new_business]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[new_business]"
+                      name="new_business" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[segment_comission]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[segment_comission]"
+                      name="segment_comission" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[first_date_comission]"
+                      name="first_date_comission" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Ambiente_Silver\Origem_TB_Bronze 1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+              description="Origem OLE DB"
+              name="Origem_TB_Bronze 1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[bronze].[Carga_base_vendas_SQL]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="A variável que contém o comando SQL a ser executado."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-6B78N2G.DW_NEXORA]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB]"
+                  name="Saída de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[period]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period]"
+                      name="period"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[user_id]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[user_id]"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[user_id]"
+                      name="user_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period_comission_brl]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[period_comission_brl]"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[period_comission_brl]"
+                      name="period_comission_brl"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[lifetime_commission_brl]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[lifetime_commission_brl]"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[lifetime_commission_brl]"
+                      name="lifetime_commission_brl"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[first_date_comission]"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[first_date_comission]"
+                      name="first_date_comission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[churn]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[churn]"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].Columns[churn]"
+                      name="churn"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[period]"
+                      dataType="wstr"
+                      length="255"
+                      name="period" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[user_id]"
+                      dataType="r8"
+                      name="user_id" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[type_of_user]"
+                      dataType="wstr"
+                      length="255"
+                      name="type_of_user" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="255"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[cluster]"
+                      dataType="wstr"
+                      length="255"
+                      name="cluster" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[office]"
+                      dataType="wstr"
+                      length="255"
+                      name="office" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[origin]"
+                      dataType="wstr"
+                      length="255"
+                      name="origin" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[churn]"
+                      dataType="wstr"
+                      length="255"
+                      name="churn" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[consulting]"
+                      dataType="wstr"
+                      length="255"
+                      name="consulting" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[new_business]"
+                      dataType="wstr"
+                      length="255"
+                      name="new_business" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[segment_comission]"
+                      dataType="wstr"
+                      length="255"
+                      name="segment_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      name="first_date_comission" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[period_comission_brl]"
+                      dataType="r8"
+                      name="period_comission_brl" />
+                    <externalMetadataColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB].ExternalColumns[lifetime_commission_brl]"
+                      dataType="r8"
+                      name="lifetime_commission_brl" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[period]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[period]"
+                      name="period" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[user_id]"
+                      dataType="r8"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[user_id]"
+                      name="user_id" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[period_comission_brl]"
+                      dataType="r8"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[period_comission_brl]"
+                      name="period_comission_brl" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[lifetime_commission_brl]"
+                      dataType="r8"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[lifetime_commission_brl]"
+                      name="lifetime_commission_brl" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[first_date_comission]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[first_date_comission]"
+                      name="first_date_comission" />
+                    <outputColumn
+                      refId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[churn]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Erro de Origem OLE DB].Columns[churn]"
+                      name="churn" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Ambiente_Silver.Paths[Saída de Coluna Derivada]"
+              endId="Package\Ambiente_Silver\Carga_Silver_Comissao.Inputs[Entrada de Destino OLE DB]"
+              name="Saída de Coluna Derivada"
+              startId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Outputs[Saída de Coluna Derivada]" />
+            <path
+              refId="Package\Ambiente_Silver.Paths[Saída de Coluna Derivada1]"
+              endId="Package\Ambiente_Silver\Carga_Silver_Cliente.Inputs[Entrada de Destino OLE DB]"
+              name="Saída de Coluna Derivada"
+              startId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Outputs[Saída de Coluna Derivada]" />
+            <path
+              refId="Package\Ambiente_Silver.Paths[Saída de Conversão de Dados]"
+              endId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga.Inputs[Entrada de Coluna Derivada]"
+              name="Saída de Conversão de Dados"
+              startId="Package\Ambiente_Silver\convert_data.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\Ambiente_Silver.Paths[Saída de Conversão de Dados1]"
+              endId="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1.Inputs[Entrada de Coluna Derivada]"
+              name="Saída de Conversão de Dados"
+              startId="Package\Ambiente_Silver\convert_data 1.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\Ambiente_Silver.Paths[Saída de Origem OLE DB]"
+              endId="Package\Ambiente_Silver\convert_data.Inputs[Entrada de Conversão de Dados]"
+              name="Saída de Origem OLE DB"
+              startId="Package\Ambiente_Silver\Origem_TB_Bronze.Outputs[Saída de Origem OLE DB]" />
+            <path
+              refId="Package\Ambiente_Silver.Paths[Saída de Origem OLE DB1]"
+              endId="Package\Ambiente_Silver\convert_data 1.Inputs[Entrada de Conversão de Dados]"
+              name="Saída de Origem OLE DB"
+              startId="Package\Ambiente_Silver\Origem_TB_Bronze 1.Outputs[Saída de Origem OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Ambiente_Silver"
+          TopLeft="113,72" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Ambiente_Silver">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Ambiente_Silver\Origem_TB_Bronze"
+          TopLeft="113,33" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Ambiente_Silver\ADD_Coluna_Data_Carga 1"
+          TopLeft="450,441" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Ambiente_Silver\Carga_Silver_Comissao"
+          TopLeft="444,507" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Ambiente_Silver\Origem_TB_Bronze 1"
+          TopLeft="356,318" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Ambiente_Silver\convert_data"
+          TopLeft="344,85" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Ambiente_Silver\convert_data 1"
+          TopLeft="587,370" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Ambiente_Silver\Carga_Silver_Cliente"
+          TopLeft="204,231" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Ambiente_Silver\ADD_Coluna_Data_Carga"
+          TopLeft="207,156" />
+        <EdgeLayout
+          Id="Package\Ambiente_Silver.Paths[Saída de Origem OLE DB1]"
+          TopLeft="532,339">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="55,52"
+              Start="0,0"
+              End="47.5,52">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.5,0"
+                    Point2="27.5,0"
+                    Point3="27.5,4" />
+                  <mssgle:LineSegment
+                    End="27.5,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.5,48"
+                    Point2="27.5,52"
+                    Point3="31.5,52" />
+                  <mssgle:LineSegment
+                    End="47.5,52" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Ambiente_Silver.Paths[Saída de Origem OLE DB]"
+          TopLeft="289,54">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="55,52"
+              Start="0,0"
+              End="47.5,52">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="23.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.5,0"
+                    Point2="27.5,0"
+                    Point3="27.5,4" />
+                  <mssgle:LineSegment
+                    End="27.5,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.5,48"
+                    Point2="27.5,52"
+                    Point3="31.5,52" />
+                  <mssgle:LineSegment
+                    End="47.5,52" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Ambiente_Silver.Paths[Saída de Conversão de Dados1]"
+          TopLeft="658.5,412">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-104,29"
+              Start="0,0"
+              End="-104,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5"
+                    Point2="0,14.5"
+                    Point3="-4,14.5" />
+                  <mssgle:LineSegment
+                    End="-100,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-100,14.5"
+                    Point2="-104,14.5"
+                    Point3="-104,18.5" />
+                  <mssgle:LineSegment
+                    End="-104,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Ambiente_Silver.Paths[Saída de Conversão de Dados]"
+          TopLeft="415.5,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-104,29"
+              Start="0,0"
+              End="-104,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5"
+                    Point2="0,14.5"
+                    Point3="-4,14.5" />
+                  <mssgle:LineSegment
+                    End="-100,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-100,14.5"
+                    Point2="-104,14.5"
+                    Point3="-104,18.5" />
+                  <mssgle:LineSegment
+                    End="-104,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Ambiente_Silver.Paths[Saída de Coluna Derivada1]"
+          TopLeft="311.5,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-16,33"
+              Start="0,0"
+              End="-16,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.5"
+                    Point2="0,16.5"
+                    Point3="-4,16.5" />
+                  <mssgle:LineSegment
+                    End="-12,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12,16.5"
+                    Point2="-16,16.5"
+                    Point3="-16,20.5" />
+                  <mssgle:LineSegment
+                    End="-16,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Ambiente_Silver.Paths[Saída de Coluna Derivada]"
+          TopLeft="554.5,483">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.5,24"
+              Start="0,0"
+              End="-11.5,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8"
+                    Point2="0,12"
+                    Point3="-4,12" />
+                  <mssgle:LineSegment
+                    End="-7.5,12" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.5,12"
+                    Point2="-11.5,12"
+                    Point3="-11.5,16" />
+                  <mssgle:LineSegment
+                    End="-11.5,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Ambiente_Silver\Origem_TB_Bronze">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Ambiente_Silver\Carga_Silver_Comissao">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Ambiente_Silver\Origem_TB_Bronze 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Ambiente_Silver\Carga_Silver_Cliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

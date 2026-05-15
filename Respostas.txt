@@ -1,0 +1,21 @@
+Calcule a distribuição de clientes ativos por analista de CS (coluna 'consulting'). O que a 
+distribuição revela sobre o balanceamento da carteira? Ha analistas sobrecarregados e 
+analistas ociosos? 
+
+Para chegar nesse valor, optei por criar duas colunas no ETL, sendo elas:
+StausCliente, onde considero o cliente como ativo, casos onde a coluna churn for nula;
+analista_resposavel, onde casos que a coluna consulting é nula, retorna Sem Analista, caso contrário, retorno valor da coluna.
+Levando em conta esse cenário, temos um total de 14480 clientes ativos. Porém se filtrar a coluna analista_resposavel temos um número menor de clientes com analistas CS responsável, chegando a 1189 clientes. Com isso, é possível observar com mais clareza que temos analistas sobrecarregados, como por exemplo o 1, 2, 4 e 5 que juntos somam 735 clientes ativos, enquanto os analistas 12,14,11 e 15 possuem 14 clientes ao todo. 
+
+
+
+Considerando a taxa de crescimento de clientes ativos em todo período, projete quantos 
+clientes a empresa terá nos próximos 6 meses, mantendo a mesma tendência. Com base 
+nessa projeção e na capacidade média atual por analista, quantos analistas adicionais cada 
+equipe precisaria? Mostre a conta. 
+
+Mantendo a dinamica acima, considerando apenas clientes ativos e com analista responsável, 
+
+
+
+
